@@ -1,0 +1,1 @@
+This just outputs a simple texture onto the screen in the shape of a rectangle. Nothing crazy so far, but we're using OpenGL to do it!
