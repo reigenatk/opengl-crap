@@ -1,0 +1,1 @@
+Working through [this awesome resource](https://learnopengl.com/Introduction). Had enough of not understanding the first thing about graphics. Too impatient to wait for a class at my school that teachers this subject matter. So I'm taking it into my own hands again :P
