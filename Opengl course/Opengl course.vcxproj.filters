@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\..\External Libs\GLAD\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ch7TwoTexturesMixed.cpp">
+    <ClCompile Include="Ch13DiffuseAndSpecular.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

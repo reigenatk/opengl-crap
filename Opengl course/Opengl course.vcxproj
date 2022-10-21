@@ -79,12 +79,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>D:\Coding\External Libs\GLFW x64;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\Coding\Graphics\LearnOpenGL\includes\learnopengl;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Coding\Graphics\LearnOpenGL\includes\learnopengl;D:\Coding\Graphics\glm;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>D:\Coding\External Libs\GLFW x64;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\Coding\Graphics\LearnOpenGL\includes\learnopengl;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Coding\Graphics\LearnOpenGL\includes\learnopengl;D:\Coding\Graphics\glm;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,7 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\External Libs\GLAD\src\glad.c" />
-    <ClCompile Include="Ch7TwoTexturesMixed.cpp" />
+    <ClCompile Include="Ch13DiffuseAndSpecular.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader_s.h" />

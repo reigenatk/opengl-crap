@@ -4,6 +4,9 @@
 #include <glfw3.h>
 #include <iostream>
 #include "shader_s.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -46,7 +49,7 @@ int main()
 	// -------------------------------------------- End Initialization ------------------------------- //
 
 	// load shaders
-	Shader ourShaders("./Shaders/Ch7TwoTexturesMixed/vs.glsl", "./Shaders/Ch7TwoTexturesMixed/fs.glsl");
+	Shader ourShaders("./Shaders/Ch8RotatingImageOverTime/vs.glsl", "./Shaders/Ch8RotatingImageOverTime/fs.glsl");
 
 
 	// -------------------------------------------- Start Convert textures ------------------------------- //
@@ -70,7 +73,7 @@ int main()
 
 	// tell stb_image.h to flip loaded texture's on the y-axis
 	// cuz in images, y=0 is the top. of course it is
-	stbi_set_flip_vertically_on_load(true); 
+	stbi_set_flip_vertically_on_load(true);
 
 
 	unsigned char* data = stbi_load("images/wood.png", &width, &height, &numChannels, 0);
@@ -112,11 +115,6 @@ int main()
 
 	// -------------------------------------------- End Convert textures ------------------------------- //
 
-	// set texture units aka assign channels to each texture (so GLSL knows which channel is what texture)
-
-	ourShaders.use();
-	glUniform1i(glGetUniformLocation(ourShaders.ID, "texture1"), 0);
-	glUniform1i(glGetUniformLocation(ourShaders.ID, "texture2"), 1);
 
 
 
@@ -185,10 +183,30 @@ int main()
 	// ----------------------------------------------
 
 
+
+	// ------------------------ Set UNIFORMS (aka stuff that GLSL expects to get from CPU) ------------------------------- //
+	// set texture units aka assign channels to each texture (so GLSL knows which channel is what texture)
+
+	ourShaders.use();
+	glUniform1i(glGetUniformLocation(ourShaders.ID, "texture1"), 0);
+	glUniform1i(glGetUniformLocation(ourShaders.ID, "texture2"), 1);
+
+
+
+	// ------------------------------------------------ END SET UNIFORMS ------------------------------- //
+
+
 	// simple render loop (its just a while loop!)
 	while (!glfwWindowShouldClose(window))
 	{
 
+		// define transformation matrix data
+		glm::mat4 mat = glm::mat4(1.0f); // identity
+		mat = glm::translate(mat, glm::vec3(0.5f, 0.5f, 0.0f)); // move center to top right corner
+		mat = glm::rotate(mat, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+		// pass in the uniform (for transformation matrices, this has to happen every frame)
+		glUniformMatrix4fv(glGetUniformLocation(ourShaders.ID, "transformation_matrix"), 1, GL_FALSE, glm::value_ptr(mat));
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
